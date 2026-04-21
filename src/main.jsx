@@ -7,9 +7,6 @@ import { shadesOfPurple } from '@clerk/themes';
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
-
-console.log("CLERK KEY:", PUBLISHABLE_KEY);
-
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}

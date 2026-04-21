@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
-    <main className="flex flex-col gap-10 sm:gap-20 py-10 sm:py-20">
+    <main className="flex flex-col gap-10 w-screen  px-20  sm:gap-20 py-10 sm:py-20 ">
       <section className="text-center ">
         <h1 className="flex flex-col items-center justify-center gradient-title font-extrabold text-4xl sm:text-6xl lg:text-8xl tracking-tighter py-4">
           Find Your Dream Job
