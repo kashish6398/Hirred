@@ -23,18 +23,18 @@ const JobListing = () => {
 
 
   useEffect(() => {
-    if(isLoaded){
+    if (isLoaded) {
       fnJobs({ searchQuery, location, company_id });
     }
   }, [isLoaded, searchQuery, location, company_id]);
 
 
-  if(!isLoaded) {
-    return <BarLoader className= "mb-4" width={"100%"} color="#36d7b7" />
+  if (!isLoaded) {
+    return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />
   }
 
   return (
-    <div className="w-screen px-10">
+    <div className="w-full px-5 sm:px-10">
       <h1 className="gradient-title font-extrabold text-6xl sm:text-7xl tracking-tighter text-center pb-8">
         Latest Jobs
       </h1>
@@ -46,24 +46,22 @@ const JobListing = () => {
       )}
 
       {loadingJobs === false && (
-        <div> 
-          {jobs?.length ?(
-          jobs.map((job) => {
-            return (<JobCard
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {jobs?.length ? (
+            jobs.map((job) => {
+              return (
+                <JobCard
                   key={job.id}
                   job={job}
                   savedInit={job?.saved?.length > 0}
-                />);
-          })
-        ) : (
-          <div>No Jobs Found</div>
-        )}
-
-
-      </div>
+                />
+              );
+            })
+          ) : (
+            <div>No Jobs Found 😢</div>
+          )}
+        </div>
       )}
-
-        
     </div>
   );
 };
