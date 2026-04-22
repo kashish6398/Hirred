@@ -31,7 +31,7 @@ const Header = () => {
 
   return (
     <>
-      <nav className="py-4 flex w-full px-5 sm:px-10 justify-between items-center">
+      <nav className="py-4 flex w-screen px-10 sm:px-20 justify-between items-center">
         <Link to="/">
           <img src="/logo.png" className="h-20" alt="Hirrd Logo" />
         </Link>
