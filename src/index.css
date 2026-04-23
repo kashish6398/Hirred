@@ -136,3 +136,23 @@
     @apply font-mono;
   }
 }
+
+.wmde-markdown {
+  background-color: transparent !important;
+  color: inherit !important;
+  font-family: inherit !important;
+}
+
+.wmde-markdown ul {
+  list-style-type: disc !important;
+  padding-left: 25px !important;
+}
+
+.wmde-markdown ol {
+  list-style-type: decimal !important;
+  padding-left: 25px !important;
+}
+
+.wmde-markdown li {
+  margin-bottom: 0.5rem;
+}

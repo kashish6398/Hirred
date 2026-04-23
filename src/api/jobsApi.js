@@ -28,3 +28,66 @@ export async function getJobs(token, { location, company_id, searchQuery } = {})
 
   return data;
 }
+
+export async function saveJob(token, {alreadySaved}, saveData) {
+  const supabase = await createSupabaseClient(token);
+
+  if(alreadySaved){
+    const {data,error: deleteError} = await supabase
+    .from("saved_jobs")
+    .delete()
+    .eq("job_id", saveData.job_id);
+
+    if (deleteError) {
+    console.error("Error Deleting Saved jobs:", deleteError);
+    return null;
+  }
+  return {data,message: "Job Removed"}
+
+  } else {
+    const {data,error: insertError} = await supabase
+    .from("saved_jobs")
+    .insert([saveData])
+    .select();
+
+    if (insertError) {
+      console.error("Error Adding Saved jobs:", insertError);
+      return null;
+    }
+    return {data,message: "Job Added"}
+  }
+}
+
+export async function getSingleJob(token,{job_id}){
+    const supabase = await createSupabaseClient(token);
+
+    const {data,error} = await supabase
+    .from("jobs")
+    .select("*,company:companies(name,logo_url), applications: applications(*)")
+    .eq("id",job_id)
+    .single();
+
+    if(error){
+        console.error("Error fetching Job:", error);
+        return null;
+    }
+
+    return data;
+} 
+
+export async function updateHiringStatus(token,{job_id},isOpen){
+    const supabase = await createSupabaseClient(token);
+
+    const {data,error} = await supabase
+    .from("jobs")
+    .update({ isOpen : isOpen})
+    .eq("id",job_id)
+    .select();
+
+    if(error){
+        console.error("Error updating hiring status:", error);
+        return null;
+    }
+
+    return data;
+} 

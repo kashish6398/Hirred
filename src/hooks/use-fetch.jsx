@@ -2,32 +2,32 @@ import { useSession } from "@clerk/clerk-react"
 import { useState } from "react";
 
 const useFetch = (cb, options = {}) => {
+  const [data, setData] = useState(undefined);
+  const [loading, setLoading] = useState(options.initialLoading || false);
+  const [error, setError] = useState(null);
 
-    const [data, setData] = useState(undefined);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    
-    const {session} = useSession();
+  const { session } = useSession();
 
-    const fn = async(...args) => {
-        setLoading(true);
-        setError(null);
+  const fn = async (...args) => {
+    setLoading(true);
+    setError(null);
 
-        try {
-            const token = await session.getToken({
-                template: "supabase",
-            });
+    try {
+      const token = await session.getToken({
+        template: "supabase",
+      });
 
-            const data = await cb(token, ...args);
-            setData(data);
-        } catch (error) {
-            setError(error);
-        } finally {
-            setLoading(false);
-        }
+      const res = await cb(token, options, ...args);
+      setData(res);
+      setError(null);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
     }
-    return {data, loading, error, fn};
+  };
 
-}
+  return { data, loading, error, fn };
+};
 
 export default useFetch;
