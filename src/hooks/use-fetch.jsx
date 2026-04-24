@@ -20,6 +20,7 @@ const useFetch = (cb, options = {}) => {
       const res = await cb(token, options, ...args);
       setData(res);
       setError(null);
+      return res;
     } catch (error) {
       setError(error);
     } finally {

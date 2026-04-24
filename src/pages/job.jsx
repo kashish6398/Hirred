@@ -1,4 +1,6 @@
 import { getSingleJob, updateHiringStatus } from "@/api/jobsApi";
+import ApplicationCard from "@/components/application-card";
+import ApplyJobDrawer from "@/components/apply-job";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import useFetch from "@/hooks/use-fetch";
 import { useUser } from "@clerk/clerk-react";
@@ -108,7 +110,29 @@ const JobPage = () => {
       />  
 
       {/* render applications */}
+      {job?.recruiter_id !== user?.id && <ApplyJobDrawer
+        jobId={job?.id}
+        job={job}
+        user = {user}
+        fetchJob={fnJob}
+        applied={job?.applications?.find(app => app.candidate_id === user.id)}
+      />
+      }
 
+      {
+        job?.applications?.length >0 && job?.recruiter_id === user?.id && (
+          <div className="flex flex-col gap-2">
+            <h2 className = "text-2xl sm:text-3xl font-bold" >Applications</h2>
+            {job?.applications.map((application)=> {
+              return (<ApplicationCard
+               key={application.id}
+               application = {application}
+               />
+              );
+              })}
+          </div>
+        ) 
+      }
       
     </div> 
   ); 
