@@ -1,4 +1,5 @@
 import { getCompanies } from "@/api/apiCompanies";
+import { addNewJob } from "@/api/jobsApi";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -10,6 +11,7 @@ import MDEditor from "@uiw/react-md-editor";
 import { State } from "country-state-city";
 import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 import z from "zod";
 
@@ -50,9 +52,27 @@ const PostJob = () => {
     }
   }, [isLoaded]);
 
+  const navigate = useNavigate();
+
+  const {
+    fn: fnCreateJob,
+    data: dataCreateJob,
+    loading: loadingCreateJob,
+    error: errorCreateJob,
+  } = useFetch(addNewJob);
+
+  useEffect(() => {
+    if (dataCreateJob) {
+      navigate("/jobs");
+    }
+  }, [dataCreateJob , navigate]);
+
   const onSubmit = (data) => {
-    console.log(data);
-    // TODO: implement job posting logic
+    fnCreateJob({
+      ...data,
+      recruiter_id: user.id,
+      isOpen: true,
+    });
   };
 
   if (!isLoaded || loadingCompanies) {
@@ -143,6 +163,14 @@ const PostJob = () => {
         />
         {errors.requirements && (
           <p className="text-red-500">{errors.requirements.message}</p>
+        )}
+
+        {errorCreateJob && (
+          <p className="text-red-500">{errorCreateJob.message}</p>
+        )}
+
+        {loadingCreateJob && (
+          <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />
         )}
 
         <Button type="submit" variant="blue" className="mt-4 w-full self-center">
