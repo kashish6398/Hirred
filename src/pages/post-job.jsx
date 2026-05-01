@@ -80,7 +80,7 @@ const PostJob = () => {
   }
 
   return (
-    <div>
+    <div className="w-screen px-10 sm:px-15">
       <h1 className="gradient-title font-extrabold text-5xl sm:text-7xl text-center pb-8">
         Post a Job
       </h1>
@@ -95,7 +95,7 @@ const PostJob = () => {
         )}
 
         <div className="flex gap-4 items-center">
-          <Controller
+          <Controller 
             name="location"
             control={control}
             render={({ field }) => (
