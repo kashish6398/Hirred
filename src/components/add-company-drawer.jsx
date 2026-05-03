@@ -10,6 +10,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { useEffect } from "react";
+import { addNewCompany } from "@/api/apiCompanies";
+import useFetch from "@/hooks/use-fetch";
+import { BarLoader } from "react-spinners";
 
 const schema = z.object({
     name: z.string().min(1, "Company name is required"),
@@ -37,21 +42,75 @@ const AddCompanyDrawer = ({
     resolver: zodResolver(schema),
   });
 
-  return (
+   const {
+    loading: loadingAddCompany,
+    error: errorAddCompany,
+    data: dataAddCompany,
+    fn: fnAddCompany,
+  } = useFetch(addNewCompany);
+
+  const onSubmit = async (data) => {
+    fnAddCompany({
+      ...data,
+      logo: data.logo[0],
+    });
+  };
+
+  useEffect(() => {
+    if (dataAddCompany?.length > 0) {
+      fetchCompanies();
+    }
+  }, [loadingAddCompany]);
+ 
+   return (
     <Drawer>
-  <DrawerTrigger>Open</DrawerTrigger>
-  <DrawerContent>
-    <DrawerHeader>
-      <DrawerTitle>Are you absolutely sure?</DrawerTitle>    </DrawerHeader>
-    <DrawerFooter>
-      <Button>Submit</Button>
-      <DrawerClose>
-        <Button variant="outline">Cancel</Button>
-      </DrawerClose>
-    </DrawerFooter>
-  </DrawerContent>
-</Drawer>
-  )
+      <DrawerTrigger>
+        <Button type="button" size="sm" variant="secondary">
+          Add Company
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Add a New Company</DrawerTitle>
+        </DrawerHeader>
+        <form className="flex gap-2 p-4 pb-0">
+          {/* Company Name */}
+          <Input placeholder="Company name" {...register("name")} />
+
+          {/* Company Logo */}
+          <Input
+            type="file"
+            accept="image/*"
+            className=" file:text-gray-500"
+            {...register("logo")}
+          />
+
+          {/* Add Button */}
+          <Button
+            type="button"
+            onClick={handleSubmit(onSubmit)}
+            variant="destructive"
+            className="w-40"
+          >
+            Add
+          </Button>
+        </form>
+        <DrawerFooter>
+          {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+          {errors.logo && <p className="text-red-500">{errors.logo.message}</p>}
+          {errorAddCompany?.message && (
+            <p className="text-red-500">{errorAddCompany?.message}</p>
+          )}
+          {loadingAddCompany && <BarLoader width={"100%"} color="#36d7b7" />}
+          <DrawerClose asChild>
+            <Button type="button" variant="secondary">
+              Cancel
+            </Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
 }
 
 export default AddCompanyDrawer

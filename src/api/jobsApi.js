@@ -107,3 +107,51 @@ export async function addNewJob(token,_,jobData){
 
     return data;
 } 
+
+export async function getSavedJobs(token){
+    const supabase = await createSupabaseClient(token);
+
+    const {data,error} = await supabase
+    .from("saved_jobs")
+    .select("* , job:jobs(*, company:companies(name,logo_url))");
+
+    if(error){
+        console.error("Error Fetching Saved jobs:", error);
+        return null;
+    }
+
+    return data;
+}
+
+export async function getMyJobs(token, { recruiter_id }) {
+  const supabase = await createSupabaseClient(token);
+
+  const { data, error } = await supabase
+    .from("jobs")
+    .select("*, company:companies(name, logo_url)")
+    .eq("recruiter_id", recruiter_id);
+
+  if (error) {
+    console.error("Error fetching my jobs:", error);
+    return null;
+  }
+
+  return data;
+}
+
+export async function deleteJob(token, { job_id }) {
+  const supabase = await createSupabaseClient(token);
+
+  const { data, error } = await supabase
+    .from("jobs")
+    .delete()
+    .eq("id",job_id)
+    .select();
+
+  if (error) {
+    console.error("Error deleting job:", error);
+    return null;
+  }
+
+  return data;
+}
