@@ -27,7 +27,7 @@ const SavedJobs = () => {
         Saved Jobs</h1>
 
         {loadingSavedJobs === false && (
-        <div className="w-screen px-10 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="w-screen px-10 sm:px-20 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {savedJobs?.length ? (
             savedJobs.map((saved) => {
               return (

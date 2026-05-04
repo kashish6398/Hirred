@@ -26,7 +26,7 @@ const CreatedApplications = () => {
   }
 
   return (
-    <div className="px-12 w-screen flex flex-col gap-2">
+    <div className="w-screen px-10 sm:px-20 flex flex-col gap-2">
       {applications?.map((application) => {
         return (
           <ApplicationCard

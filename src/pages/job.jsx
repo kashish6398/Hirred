@@ -45,7 +45,7 @@ const JobPage = () => {
   
 
   return (
-    <div className="w-screen px-10 sm:px-15 flex flex-col gap-8 mt-5">
+    <div className="w-screen px-10 sm:px-20 flex flex-col gap-8 mt-5">
       <div className="flex flex-col-reverse gap-6 md:flex-row justify-between items-center">
         <h1 className="gradient-title font-bold text-3xl sm:text-5xl">
           {job?.title}

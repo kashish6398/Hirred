@@ -81,7 +81,7 @@ const PostJob = () => {
   }
 
   return (
-    <div className="w-screen px-10 sm:px-15">
+    <div className="w-screen px-10 sm:px-20">
       <h1 className="gradient-title font-extrabold text-5xl sm:text-7xl text-center pb-8">
         Post a Job
       </h1>
