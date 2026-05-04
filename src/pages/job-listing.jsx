@@ -31,7 +31,7 @@ const JobListing = () => {
   const {
     fn: fnCompanies,
     data: companies,
-    loading: loadingCompanies, 
+    loading: loadingCompanies,
   } = useFetch(getCompanies, {
     initialLoading: true,
   })
@@ -118,11 +118,11 @@ const JobListing = () => {
             <SelectGroup>
               {companies?.map(({ name, id }) => {
                 return (
-                  <SelectItem key={name} value={id}> 
+                  <SelectItem key={name} value={id}>
                     {name}
                   </SelectItem>
                 );
-              })} 
+              })}
             </SelectGroup>
           </SelectContent>
         </Select>

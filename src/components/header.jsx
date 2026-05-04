@@ -36,7 +36,7 @@ const Header = () => {
           <img src="/logo.png" className="h-20" alt="Hirrd Logo" />
         </Link>
 
-        <div className="flex gap-8">
+        <div className="flex gap-4 sm:gap-8 items-center">
           <SignedOut>
             <Button variant="outline" onClick={() => setShowSignIn(true)}>
               Login
@@ -45,9 +45,9 @@ const Header = () => {
           <SignedIn>
             {user?.unsafeMetadata?.role === "recruiter" && (
               <Link to="/post-job">
-                <Button variant="destructive" className="rounded-full">
-                  <PenBox size={20} className="mr-2" />
-                  Post a Job
+                <Button variant="destructive" className="rounded-full w-10 h-10 sm:w-auto sm:h-auto sm:px-4 flex items-center justify-center">
+                  <PenBox size={20} className="sm:mr-2" />
+                  <span className="hidden sm:inline">Post a Job</span>
                 </Button>
               </Link>
             )}
@@ -55,6 +55,7 @@ const Header = () => {
               appearance={{
                 elements: {
                   avatarBox: "w-10 h-10",
+                  userButtonPopoverCard: "min-w-[200px] sm:min-w-[300px] shadow-xl",
                 },
               }}
             >

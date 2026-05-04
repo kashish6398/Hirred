@@ -12,13 +12,13 @@ const SavedJobs = () => {
     data: savedJobs,
     fn: fnSavedJobs,
   } = useFetch(getSavedJobs)
-  
+
   useEffect(() => {
     if (isLoaded) fnSavedJobs();
   }, [isLoaded])
 
   if (!isLoaded || loadingSavedJobs) {
-    return <BarLoader className="mb-4" width={"100vw"} color="#36d7b7"/>  
+    return <BarLoader className="mb-4" width={"100vw"} color="#36d7b7" />
   }
 
   return (
@@ -26,7 +26,7 @@ const SavedJobs = () => {
       <h1 className="gradient-title font-extrabold text-6xl sm:text-7xl text-center pb-8">
         Saved Jobs</h1>
 
-        {loadingSavedJobs === false && (
+      {loadingSavedJobs === false && (
         <div className="w-screen px-10 sm:px-20 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {savedJobs?.length ? (
             savedJobs.map((saved) => {

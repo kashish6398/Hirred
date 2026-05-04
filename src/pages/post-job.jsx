@@ -66,7 +66,7 @@ const PostJob = () => {
     if (dataCreateJob) {
       navigate("/jobs");
     }
-  }, [dataCreateJob , navigate]);
+  }, [dataCreateJob, navigate]);
 
   const onSubmit = (data) => {
     fnCreateJob({
@@ -96,7 +96,7 @@ const PostJob = () => {
         )}
 
         <div className="flex gap-4 items-center">
-          <Controller 
+          <Controller
             name="location"
             control={control}
             render={({ field }) => (
@@ -126,7 +126,7 @@ const PostJob = () => {
                   <SelectValue placeholder="Company">
                     {field.value
                       ? companies?.find((com) => com.id === Number(field.value))
-                          ?.name
+                        ?.name
                       : "Company"}
                   </SelectValue>
                 </SelectTrigger>
@@ -142,7 +142,7 @@ const PostJob = () => {
               </Select>
             )}
           />
-          
+
           {/* Add Company Button Drawer Trigger Placeholder */}
           <AddCompanyDrawer fetchCompanies={fnCompanies} />
         </div>
