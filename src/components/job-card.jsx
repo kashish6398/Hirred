@@ -59,7 +59,7 @@ const JobCard = ({
         <CardTitle className="flex justify-between font-bold">
           {job.title}
           {isMyJob && (
-            <Trash2Icon
+            <Trash2
               size={18}
               className='text-red-300 cursor-pointer'
               onClick={handleDeleteJob}

@@ -23,7 +23,7 @@ const CreatedJobs = () => {
   return (
     <div>
       {loadingCreatedJobs ? (
-        <BarLoader className="mt-4" width={"100%"} color="#36d7b7" />
+        <BarLoader className="mb-4 mt-4" width={"100vw"} color="#36d7b7" />
       ) : (
         <div className="w-screen mt-8 justify-center items-center grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {createdJobs?.length ? (

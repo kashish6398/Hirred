@@ -18,16 +18,16 @@ const SavedJobs = () => {
   }, [isLoaded])
 
   if (!isLoaded || loadingSavedJobs) {
-    return <BarLoader className="mb-4" width={"100%"} color="#36d7b7"/>  
+    return <BarLoader className="mb-4" width={"100vw"} color="#36d7b7"/>  
   }
 
   return (
-    <div>
-      <h1 className="w-screen gradient-title font-extrabold text-6xl sm:text-7xl text-center pb-8">
+    <div className="w-screen flex flex-col items-center">
+      <h1 className="gradient-title font-extrabold text-6xl sm:text-7xl text-center pb-8">
         Saved Jobs</h1>
 
         {loadingSavedJobs === false && (
-        <div className="px-10 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="w-screen px-10 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {savedJobs?.length ? (
             savedJobs.map((saved) => {
               return (
