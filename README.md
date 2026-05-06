@@ -7,6 +7,7 @@ This platform enables users to explore jobs, save opportunities, and manage job 
 
 ## 🌐 Live Demo
 
+🔗 https://hirred-sepia.vercel.app/
 🔗 https://hirredportal.netlify.app/
 
 ---
